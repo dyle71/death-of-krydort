@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# ------------------------------------------------------------
+# krydort
+#
+# krydort helper start script
+#
+# This file is part of krydort.
+#
+# (C) Copyright 2020
+# Oliver Maurhart, oliver.maurhart@headcode.space
+# headcode.space e.U., https.//www.headcode.space
+# ------------------------------------------------------------
+
+SCRIPT_LOCATION=`readlink -f $0`
+ROOT_FOLDER=`dirname $SCRIPT_LOCATION`
+ROOT_FOLDER=`dirname $ROOT_FOLDER`
+
+# Detect virtual env python3
+# ... installed on target system
+PYTHON3="$ROOT_FOLDER/bin/python3"
+if [ ! -x $PYTHON3 ]; then
+    # ... while under development
+    PYTHON3="$ROOT_FOLDER/venv/bin/python3"
+fi
+if [ ! -x $PYTHON3 ]; then
+    echo "Cannot find venv python3."
+    exit 1
+fi
+
+$PYTHON3 -m krydort $*
