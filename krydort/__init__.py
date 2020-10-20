@@ -10,7 +10,7 @@
 #
 # (C) Copyright 2020
 # Oliver Maurhart, oliver.maurhart@headcode.space
-# headcode.space e.U., https.//www.headcode.space
+# headcode.space e.U., https://www.headcode.space
 # ------------------------------------------------------------
 
 """This is the krydort package."""

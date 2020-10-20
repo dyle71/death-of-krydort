@@ -7,16 +7,13 @@
 #
 # (C) Copyright 2020
 # Oliver Maurhart, oliver.maurhart@headcode.space
-# headcode.space e.U., https.//www.headcode.space
+# headcode.space e.U., https://www.headcode.space
 # ------------------------------------------------------------
 
 """This module provides all command line stuff and figures."""
 
 import click
 import sys
-
-from .configuration import Configuration
-from . import krydort
 
 
 @click.command(context_settings={'help_option_names': ['-h', '--help']})
@@ -42,5 +39,8 @@ def cli(probes=1000,
 
 def show_version() -> None:
     """Shows the program version."""
-    from . import __version__
+    from . import __version__, __copyright__, __uri__, __author__, __email__
     print('krydort V' + __version__)
+    print(__copyright__)
+    print(__uri__)
+    print(__author__ + ', ' + __email__)

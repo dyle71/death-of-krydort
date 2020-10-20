@@ -7,8 +7,10 @@
 # krydort setuptools main file
 #
 # This file is part of krydort.
-# See the LICENSE file for the software license.
-# (C) Copyright 2020, Oliver Maurhart, oliver.maurhart@headcode.space
+#
+# (C) Copyright 2020
+# Oliver Maurhart, oliver.maurhart@headcode.space
+# headcode.space e.U., https://www.headcode.space
 # ------------------------------------------------------------
 
 from setuptools import setup
