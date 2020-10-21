@@ -37,6 +37,25 @@ ship of undead Nilfgardians.**
 
 ## Running krydort
 
+To check if Krydort succeeds a swimming role, which resorts to "Atheltics"
+do a
+
+```
+$ python3 -m krydort --probes 100000 --mode normal --luck 1 Athletics
+Checking "Athletics" (DEX): attribute value = 6, skill value = 2
+Game mode: normal - LUCK spend: 1
+DC-level           minimum        failures          f-rate         success          s-rate         fumbles        critical
+easy                    10           10045            0.10           89955            0.90           10045            9982
+average                 14           50246            0.50           49754            0.50           10045            9982
+challenging             18           90018            0.90            9982            0.10           10045            9982
+difficult               20           91006            0.91            8994            0.09           10045            9982
+impossible              30           99099            0.99             901            0.01           10045            9982
+```
+
+Whereas: 
+* `minium` lists the value one has to be greater to
+* `f-rate` is the failure rate
+* `s-rate` is the success rate 
 
 
 ---

@@ -34,10 +34,11 @@ def d10() -> int:
     return random.randint(1, 10)
 
 
-def roll_normal() -> (int, bool, bool):
+def roll_normal(luck: int) -> (int, bool, bool):
     """This is the normal rolling as depicted in the books.
     
-    :returns:   value, critical-failure, critical-success
+    :param luck:    luck points spent
+    :returns:       value, critical-failure, critical-success
     """
     
     roll = d10()
@@ -59,5 +60,7 @@ def roll_normal() -> (int, bool, bool):
         while roll == 10:
             roll = d10()
             value = value - roll
-            
+    
+    value = value + luck
+    
     return value, fumble, critical_success
