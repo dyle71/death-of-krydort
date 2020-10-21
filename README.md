@@ -75,7 +75,6 @@ average                 14           49919            0.50           50081      
 challenging             18           90066            0.90            9934            0.10            9989            9934
 difficult               20           91048            0.91            8952            0.09            9989            9934
 impossible              30           99110            0.99             890            0.01            9989            9934
-dyle@moghedien 10:10 ~/Source/dyle/death-of-krydort (main *)
 ```
 Clearly the chances to drown are 50:50 on average. Any higher level is sure death.
 
