@@ -64,3 +64,43 @@ def roll_normal(luck: int) -> (int, bool, bool):
     value = value + luck
     
     return value, fumble, critical_success
+
+
+def roll_house1(luck: int) -> (int, bool, bool):
+    """First iteration of the House Rules.
+    
+    Only 1 is fumble if the next roll is > 5.
+    For each luck add a D6 on success
+
+    :param luck:    luck points spent
+    :returns:       value, critical-failure, critical-success
+    """
+    
+    roll = d10()
+    value = roll
+    
+    critical_success = roll == 10
+    fumble = roll == 1
+    
+    # Critical Success: exploding die
+    if critical_success:
+        while roll == 10:
+            roll = d10()
+            value = value + roll
+    
+    # Fumble: exploding die into negative (starting at 0)
+    if fumble:
+        roll = d10()
+        value = -roll
+        
+        # correct fumble value
+        fumble = (roll > 5)
+        while roll == 10:
+            roll = d10()
+            value = value - roll
+    else:
+        # no fumble: add luck
+        for r in range(0, luck):
+            value = value + d6()
+    
+    return value, fumble, critical_success

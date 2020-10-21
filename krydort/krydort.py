@@ -84,6 +84,8 @@ def run(mode: str, luck: int, skill: str, probes: int) -> None:
     
     # skill resolution strategy
     resolve = game_mode.roll_normal
+    if mode == 'house1':
+        resolve = game_mode.roll_house1
     
     char = birth()
     attribute_name = character.Skills.skill_map[skill]
