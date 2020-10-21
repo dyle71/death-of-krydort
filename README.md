@@ -31,9 +31,6 @@ act of swimming _somehow_ demanding.
 
 This tiny program tries to evaluate different alternatives to:
 
-**The not entirely surprising death of Krydort Wolvirry, merchant of 
-Kaedwen, finding himself suddenly floating in the North Sea alongside a 
-ship of undead Nilfgardians.**
 
 ## Running krydort
 
