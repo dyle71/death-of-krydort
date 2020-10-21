@@ -13,17 +13,22 @@
 """This module provides all command line stuff and figures."""
 
 import click
+import json
 import sys
 
 
 @click.command(context_settings={'help_option_names': ['-h', '--help']})
-@click.option('--mode', type=str, help='Game mechanics mode: "normal", "house1" or "house2".')
-@click.option('--luck', type=int, default=0, help='Number of LUCK to spend.')
-@click.option('--probes', type=int, help='Number of probes.')
+@click.option('--character', '-c', is_flag=True, help='Describe Krydort.')
+@click.option('--skills', '-s', is_flag=True, help='Show available skills.')
+@click.option('--mode', '-m', type=str, help='Game mechanics mode: "normal", "house1" or "house2".')
+@click.option('--luck', '-l', type=int, default=0, help='Number of LUCK to spend.')
+@click.option('--probes', '-p', type=int, help='Number of probes.')
 @click.option('--no-color', is_flag=True, help='Turn off color output.')
 @click.option('--version', '-v', is_flag=True, help='Show version and exit.')
-@click.argument('skill', required=True, nargs=1)
-def cli(mode='normal',
+@click.argument('skill', required=False, nargs=1)
+def cli(character=False,
+        skills=False,
+        mode='normal',
         luck=0,
         probes=1000,
         no_color=False,
@@ -39,9 +44,43 @@ def cli(mode='normal',
     if version:
         show_version()
         sys.exit(0)
+        
+    if skills:
+        show_skills()
+        sys.exit(0)
+
+    if character:
+        show_character()
+        sys.exit(0)
 
     from . import krydort
+    from . import character
+    
+    if skill not in character.Skills.skill_map.keys():
+        print(f'Unknown skill: "{skill}".')
+        print(f'Type --character for Krydort\'s attributes and skills.')
+        print(f'Type --skills for a list of available skills.')
+        sys.exit(1)
+    
     krydort.run(mode, luck, skill, probes)
+
+
+def show_character() -> None:
+    """Show Krydort Wolverry stats"""
+    from . import krydort
+    krydort = krydort.birth()
+    print(json.dumps(krydort.debug_dict(), indent="    "))
+
+
+def show_skills() -> None:
+    """Show available skills"""
+    
+    from . import character
+    
+    print(f'Available skills:')
+    for a in character.Attributes().names:
+        s = character.Skills.skills_by_attribute(a)
+        print(f'{a:<5}: ' + ', '.join(character.Skills.skills_by_attribute(a)))
 
 
 def show_version() -> None:

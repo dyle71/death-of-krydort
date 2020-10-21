@@ -41,6 +41,9 @@ def roll_normal(luck: int) -> (int, bool, bool):
     :returns:       value, critical-failure, critical-success
     """
     
+    if not isinstance(luck, int) or luck < 0:
+        raise ValueError("luck must be an integer greater or equal to 0.")
+    
     roll = d10()
     value = roll
     
@@ -75,7 +78,10 @@ def roll_house1(luck: int) -> (int, bool, bool):
     :param luck:    luck points spent
     :returns:       value, critical-failure, critical-success
     """
-    
+
+    if not isinstance(luck, int) or luck < 0:
+        raise ValueError("luck must be an integer greater or equal to 0.")
+
     roll = d10()
     value = roll
     
@@ -116,7 +122,10 @@ def roll_house2(luck: int) -> (int, bool, bool):
     :param luck:    luck points spent
     :returns:       value, critical-failure, critical-success
     """
-    
+
+    if not isinstance(luck, int) or luck < 0:
+        raise ValueError("luck must be an integer greater or equal to 0.")
+
     pool_size = 2 + luck
     dices = []
     for roll in range(0, pool_size):

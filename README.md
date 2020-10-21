@@ -54,6 +54,8 @@ Whereas:
 * `minium` lists the value one has to be greater to
 * `f-rate` is the failure rate
 * `s-rate` is the success rate 
+* `fu-rate` is the fumble rate
+* `cs-rate` is the critical success rate 
 
 The current house rules are:
 

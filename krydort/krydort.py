@@ -15,14 +15,13 @@
 """This module represents the poor merchant Krydort Wolverry."""
 
 from collections import namedtuple
-import json
 
 from . import character
 from . import game_mode
 
 
 def birth() -> character.Character:
-    """Gives birhth to krydort."""
+    """Gives birth to krydort."""
     krydort = character.Character('Krydort Wolverry')
     
     krydort.attributes.INT = 8
@@ -88,7 +87,7 @@ def run(mode: str, luck: int, skill: str, probes: int) -> None:
         resolve = game_mode.roll_house1
     if mode == 'house2':
         resolve = game_mode.roll_house2
-
+    
     char = birth()
     attribute_name = character.Skills.skill_map[skill]
     attribute_value, skill_value = char.values(skill)
@@ -117,14 +116,27 @@ def run(mode: str, luck: int, skill: str, probes: int) -> None:
 
 def show(result: {}) -> None:
     """Pushes the result on stdout."""
-    print('{0:<10}\t{1:>10}\t{2:>10}\t{3:>10}\t{4:>10}\t{5:>10}\t{6:>10}\t{7:>10}'.format('DC-level', 'minimum',
-                                                                                          'failures', 'f-rate',
-                                                                                          'success', 's-rate',
-                                                                                          'fumbles', 'critical'))
+    print('{0:<10}\t{1:>10}\t{2:>10}\t{3:>10}\t{4:>10}\t{5:>10}\t{6:>10}\t{7:>10}\t{8:>10}\t{9:>10}'.format('DC-level',
+                                                                                                            'minimum',
+                                                                                                            'failures',
+                                                                                                            'f-rate',
+                                                                                                            'success',
+                                                                                                            's-rate',
+                                                                                                            'fumbles',
+                                                                                                            'fu-rate',
+                                                                                                            'critical',
+                                                                                                            'cs-rate'))
     for level in result:
         r = result[level]
         total = r.failures + r.success
+        
         failure_rate = r.failures / total
         success_rate = r.success / total
-        print(
-            f'{level:<10}\t{r.minimum:>10}\t{r.failures:>10}\t{failure_rate:>10.2f}\t{r.success:>10}\t{success_rate:>10.2f}\t{r.fumbles:>10}\t{r.critical_success:>10}')
+        fumble_rate = r.fumbles / total
+        critical_rate = r.critical_success / total
+        
+        line = [f'{level:<10}\t{r.minimum:>10}\t{r.failures:>10}\t{failure_rate:>10.4f}',
+                f'\t{r.success:>10}\t{success_rate:>10.4f}\t{r.fumbles:>10}\t{fumble_rate:>10.4f}',
+                f'\t{r.critical_success:>10}\t{critical_rate:>10.4f}']
+        
+        print(''.join(line))
