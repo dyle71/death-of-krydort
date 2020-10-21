@@ -4,7 +4,7 @@
 Kaedwen, finding himself suddenly floating in the North Sea alongside a 
 ship of undead Nilfgardians.**
 
-A Table-Top Witcher 3 RPG Dice game system evaluator
+A Table-Top Witcher 3 RPG Dice game system evaluator.
 
 ## Rationale
 
@@ -15,7 +15,7 @@ However, we were quite dissatisfied and unconvinced on the original game
 mechanics rolling a single D10 to resolve challenges.
 
 In particular, I'm playing a merchant of Kaedwen, who is ... well ...
-physically not really suited. Basically he good with his wits and can
+physically not really suited. Basically he's good with his wits and can
 convince anyone to buy anything. 
 
 Full stop.
