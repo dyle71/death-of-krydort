@@ -17,7 +17,7 @@ import sys
 
 
 @click.command(context_settings={'help_option_names': ['-h', '--help']})
-@click.option('--mode', type=str, help='Game mechanics mode: "normal", "house1".')
+@click.option('--mode', type=str, help='Game mechanics mode: "normal", "house1" or "house2".')
 @click.option('--luck', type=int, default=0, help='Number of LUCK to spend.')
 @click.option('--probes', type=int, help='Number of probes.')
 @click.option('--no-color', is_flag=True, help='Turn off color output.')

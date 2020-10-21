@@ -86,7 +86,9 @@ def run(mode: str, luck: int, skill: str, probes: int) -> None:
     resolve = game_mode.roll_normal
     if mode == 'house1':
         resolve = game_mode.roll_house1
-    
+    if mode == 'house2':
+        resolve = game_mode.roll_house2
+
     char = birth()
     attribute_name = character.Skills.skill_map[skill]
     attribute_value, skill_value = char.values(skill)

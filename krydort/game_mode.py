@@ -104,3 +104,43 @@ def roll_house1(luck: int) -> (int, bool, bool):
             value = value + d6()
     
     return value, fumble, critical_success
+
+
+def roll_house2(luck: int) -> (int, bool, bool):
+    """Second iteration of the House Rules.
+    
+    Instead of one D10 we roll now 2 * D5.
+    Critical success is rolling 5-5, fumble is rolling 1-1
+    Luck adds extra D5 on the first roll creating a pool of dice.
+
+    :param luck:    luck points spent
+    :returns:       value, critical-failure, critical-success
+    """
+    
+    pool_size = 2 + luck
+    dices = []
+    for roll in range(0, pool_size):
+        dices.append(d5())
+    dices.sort(reverse=True)
+    value = dices[0] + dices[1]
+    
+    critical_success = dices[0] == 5 and dices[1] == 5
+    fumble = dices[0] == 1 and dices[1] == 1
+    
+    # Critical Success: exploding die
+    if critical_success:
+        roll = d5() + d5()
+        value = value + roll
+        while roll == 10:
+            roll = d5() + d5()
+            value = value + roll
+    
+    # Fumble: exploding die into negative (starting at 0)
+    if fumble:
+        roll = d5() + d5()
+        value = -roll
+        while roll == 10:
+            roll = d5() + d5()
+            value = value - roll
+    
+    return value, fumble, critical_success
