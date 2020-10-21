@@ -17,6 +17,7 @@
 from collections import namedtuple
 
 from . import character
+from . import color
 from . import game_mode
 
 
@@ -62,7 +63,7 @@ def birth() -> character.Character:
     return krydort
 
 
-def run(mode: str, luck: int, skill: str, probes: int) -> None:
+def run(mode: str, luck: int, skill: str, probes: int, no_color: bool) -> None:
     """The evaluation
     
     :param mode:    game mechanic mode
@@ -111,10 +112,10 @@ def run(mode: str, luck: int, skill: str, probes: int) -> None:
                 critical_success = critical_success + 1
             result_rates[level] = Result(minimum, failures, success, fumbles, critical_success)
     
-    show(result_rates)
+    show(result_rates, no_color)
 
 
-def show(result: {}) -> None:
+def show(result: {}, no_color: bool) -> None:
     """Pushes the result on stdout."""
     print('{0:<10}\t{1:>10}\t{2:>10}\t{3:>10}\t{4:>10}\t{5:>10}\t{6:>10}\t{7:>10}\t{8:>10}\t{9:>10}'.format('DC-level',
                                                                                                             'minimum',
@@ -139,4 +140,10 @@ def show(result: {}) -> None:
                 f'\t{r.success:>10}\t{success_rate:>10.4f}\t{r.fumbles:>10}\t{fumble_rate:>10.4f}',
                 f'\t{r.critical_success:>10}\t{critical_rate:>10.4f}']
         
-        print(''.join(line))
+        line = ''.join(line)
+        if failure_rate > 0.8:
+            line = color.bad(line, no_color)
+        if success_rate > 0.8:
+            line = color.good(line, no_color)
+        
+        print(line)

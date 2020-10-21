@@ -62,7 +62,7 @@ def cli(character=False,
         print(f'Type --skills for a list of available skills.')
         sys.exit(1)
     
-    krydort.run(mode, luck, skill, probes)
+    krydort.run(mode, luck, skill, probes, no_color)
 
 
 def show_character() -> None:
