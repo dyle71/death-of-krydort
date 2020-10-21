@@ -25,6 +25,7 @@ def main() -> None:
     try:
         command_line.cli(prog_name='krydort')
     except Exception as e:
+        print(str(e))
         sys.exit(1)
 
 

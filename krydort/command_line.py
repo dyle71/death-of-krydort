@@ -17,12 +17,16 @@ import sys
 
 
 @click.command(context_settings={'help_option_names': ['-h', '--help']})
+@click.option('--mode', type=str, help='Game mechanics mode: "normal".')
 @click.option('--probes', type=int, help='Number of probes.')
 @click.option('--no-color', is_flag=True, help='Turn off color output.')
 @click.option('--version', '-v', is_flag=True, help='Show version and exit.')
-def cli(probes=1000,
+@click.argument('skill', required=True, nargs=1)
+def cli(mode='normal',
+        probes=1000,
         no_color=False,
-        version=False) -> None:
+        version=False,
+        skill=None) -> None:
 
     """Krydort Wolvirry tries not to drown next to a Nilfgardian galleon.
     
@@ -35,7 +39,7 @@ def cli(probes=1000,
         sys.exit(0)
 
     from . import krydort
-    krydort.run()
+    krydort.run(mode, skill, probes)
 
 
 def show_version() -> None:

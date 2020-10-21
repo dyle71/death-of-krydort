@@ -142,4 +142,7 @@ class Character(object):
 
     def values(self, name: str) -> (int, int):
         """Returns first the attribute and then the skill value of the skill by the given name."""
-        pass
+        if name not in Skills.skill_map:
+            raise ValueError(f'Unknown skill: "{name}".')
+        a = Skills.skill_map[name]
+        return self.attributes.__getattribute__(a), self._skills[a].__getattribute__(name)

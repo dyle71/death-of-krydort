@@ -14,7 +14,11 @@
 
 """This module represents the poor merchant Krydort Wolverry."""
 
+from collections import namedtuple
+import json
+
 from . import character
+from . import game_mode
 
 
 def birth() -> character.Character:
@@ -59,6 +63,60 @@ def birth() -> character.Character:
     return krydort
 
 
-def run() -> None:
-    """The evaluation"""
-    krydort = birth()
+def run(mode: str, skill: str, probes: int) -> None:
+    """The evaluation
+    
+    :param mode:    game mechanic mode
+    :param skill:   the skill to probe
+    :param probes:  amount of probes
+    """
+
+    # minimum_value, failure, success, fumbles, critical_success rates at each DC-level
+    Result = namedtuple('Result', 'minimum failures success fumbles critical_success')
+    result_rates = {
+        'easy': Result(10, 0, 0, 0, 0),
+        'average': Result(14, 0, 0, 0, 0),
+        'challenging': Result(18, 0, 0, 0, 0),
+        'difficult': Result(20, 0, 0, 0, 0),
+        'impossible': Result(30, 0, 0, 0, 0)
+    }
+
+    # skill resolution strategy
+    resolve = game_mode.roll_normal
+    
+    char = birth()
+    attribute_name = character.Skills.skill_map[skill]
+    attribute_value, skill_value = char.values(skill)
+    print(f'Checking "{skill}" ({attribute_name}): attribute value = {attribute_value}, skill value = {skill_value}')
+    
+    for p in range(0, probes):
+        
+        roll = resolve()
+        final_value = attribute_value + skill_value + roll[0]
+        
+        for level in result_rates:
+            minimum, failures, success, fumbles, critical_success = result_rates[level]
+            if minimum >= final_value:
+                failures = failures + 1
+            else:
+                success = success + 1
+            if roll[1]:
+                fumbles = fumbles + 1
+            if roll[2]:
+                critical_success = critical_success + 1
+            result_rates[level] = Result(minimum, failures, success, fumbles, critical_success)
+            
+    show(result_rates)
+        
+        
+def show(result: {}) -> None:
+    """Pushes the result on stdout."""
+    print('{0:<10}\t{1:>10}\t{2:>10}\t{3:>10}\t{4:>10}\t{5:>10}\t{6:>10}\t{7:>10}'.format('level','minimum', 'failures', 'f-rate', 'success', 's-rate', 'fumbles', 'critical'))
+    for level in result:
+        r = result[level]
+        total = r.failures + r.success
+        failure_rate = r.failures / total
+        success_rate = r.success / total
+        print(f'{level:<10}\t{r.minimum:>10}\t{r.failures:>10}\t{failure_rate:>10.2f}\t{r.success:>10}\t{success_rate:>10.2f}\t{r.fumbles:>10}\t{r.critical_success:>10}')
+    
+
