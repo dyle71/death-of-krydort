@@ -29,7 +29,8 @@ The original gameplay states: attribute + skill + D10 > 14 to succeed.
 Krydort has a DEX attribute of 6 and an Athletics skill of 2, making the
 act of swimming _somehow_ demanding.
 
-This tiny program tries to evaluate different alternatives to:
+This tiny program tries to evaluate different alternatives to in the game
+mechanics.
 
 
 ## Running krydort
