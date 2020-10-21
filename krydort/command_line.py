@@ -34,7 +34,8 @@ def cli(probes=1000,
         show_version()
         sys.exit(0)
 
-    print("BLAH")
+    from . import krydort
+    krydort.run()
 
 
 def show_version() -> None:

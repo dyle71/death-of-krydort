@@ -1,4 +1,9 @@
 # death-of-krydort
+
+**The not entirely surprising death of Krydort Wolvirry, merchant of 
+Kaedwen, finding himself suddenly floating in the North Sea alongside a 
+ship of undead Nilfgardians.**
+
 A Table-Top Witcher 3 RPG Dice game system evaluator
 
 ## Rationale
