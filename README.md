@@ -26,8 +26,8 @@ the ship he simply needs to survive and swim to the vessel.
 
 The original gameplay states: attribute + skill + D10 > 14 to succeed.
 
-Krydort has a BODY attribute of 6 and an Athletics skill of 0, making the
-act of swimming somehow demanding.
+Krydort has a DEX attribute of 6 and an Athletics skill of 2, making the
+act of swimming _somehow_ demanding.
 
 This tiny program tries to evaluate different alternatives to:
 
